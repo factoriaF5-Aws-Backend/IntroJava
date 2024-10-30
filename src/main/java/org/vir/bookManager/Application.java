@@ -1,8 +1,16 @@
 package org.vir.bookManager;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Application {
+
+    private ArrayList<Book> bookList = new ArrayList<>();
+
+    public Application() {
+        this.bookList.add(new Book("A123", "Clean Code", "Robert C Martin"));
+        this.bookList.add(new Book("A124", "Clean Architecture", "Robert C Martin"));
+    }
 
     public void printMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -39,6 +47,21 @@ public class Application {
             }
 
             System.out.println("Ha elegido: " + menu[option - 1]);
+            this.optionSelector(option);
+
+            System.out.println("------------------------------------------");
+        }
+    }
+
+    private void optionSelector(byte option) {
+        if (option == 2) this.printBookList();
+    }
+
+    private void printBookList() {
+        if (bookList.isEmpty()) System.out.println("No hay libros");
+
+        for (Book book : bookList) {
+            System.out.println(book.toString());
         }
     }
 }
